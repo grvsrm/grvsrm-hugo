@@ -15,22 +15,28 @@ subtitle = ""
 # For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
 
 [[feature]]
-  icon = "r-project"
-  icon_pack = "fab"
-  name = "R"
-  description = "90%"
-  
+  icon = "bar-chart"
+  icon_pack = "fas"
+  name = "Analytics"
+  description = "Using Data Science in Manufacturing"
+
 [[feature]]
   icon = "chart-line"
   icon_pack = "fas"
   name = "Statistics"
-  description = "90%"  
+  description = "Loves to convert data nto insights"  
+
+[[feature]]
+  icon = "r-project"
+  icon_pack = "fab"
+  name = "R"
+  description = "Loves to do data analysis in R"
   
 [[feature]]
   icon = "industry"
   icon_pack = "fas"
   name = "Industry 4.0"
-  description = "80%"
+  description = "Experienced in setting up smart factories"
 
 # Uncomment to use emoji icons.
 # [[feature]]
