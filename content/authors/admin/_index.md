@@ -63,8 +63,8 @@ email: ""
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 #user_groups:
-- Researchers
-- Visitors
+#- Researchers
+#- Visitors
 ---
 
 I am an Engineer and a Data Scientist. Before moving into Data Science, I spent a considerable time in Manufacturing Industry. I started my career as an Opertaions and Maintenance Engineer and later moved to smart factory initiatives. I have a decent exposure to Industry 4.0 and Factory Digitization. I have a keen interest in using data to gain insights. My inclination is more towards decision making using data rather than making data products.
