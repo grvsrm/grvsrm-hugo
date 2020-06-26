@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Nelson Bighetti
+title: Gaurav Sharma
 
 # Username (this should match the folder name)
 authors:
@@ -10,31 +10,28 @@ authors:
 superuser: true
 
 # Role/position
-role: Professor of Artificial Intelligence
+role: Data Scientist | Engineer | INTJ
 
 # Organizations/Affiliations
 organizations:
-- name: Stanford University
-  url: ""
+- name: Indian School of Business
+  url: "https://www.isb.edu/"
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include distributed robotics, mobile computing and programmable matter.
+bio: My research interests include Manufacturing Analytics, Industry 4.0 and Factory Digitization.
 
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+- Manufacturing Analytics
+- Industry 4.0
+- Factories of the Future
 
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
+  - course: AMPBA in Business Analytics
+    institution: Indian School of Business, IN
+    year: 2019
+  - course: B.E. in Electronics & Communication
+    institution: Jaipur Engineering College & REsearch Centre, IN
     year: 2008
 
 # Social/Academic Networking
@@ -47,29 +44,31 @@ social:
   link: '#contact'  # For a direct email link, use "mailto:test@example.org".
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/GeorgeCushen
-- icon: google-scholar
-  icon_pack: ai
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+  link: https://twitter.com/GRstats
+- icon: linkedin
+  icon_pack: fab
+  link: https://www.linkedin.com/in/grvsrm/
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/grvsrm
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
-# - icon: cv
-#   icon_pack: ai
-#   link: files/cv.pdf
+ - icon: cv
+   icon_pack: ai
+   link: files/Resume Gaurav S.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
-user_groups:
+#user_groups:
 - Researchers
 - Visitors
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
+I am an Engineer and a Data Scientist. Before moving into Data Science, I spent a considerable time in Manufacturing Industry. I started my career as an Opertaions and Maintenance Engineer and later moved to smart factory initiatives. I have a decent exposure to Industry 4.0 and Factory Digitization. I have a keen interest in using data to gain insights. My inclination is more towards decision making using data rather than making data products.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+I have a varied area of interests. I am always keen in trying new things, learning is a life long journey for me. I find joy in doing different things. If you are interested in knowing more about data science projects, do check my portfolio below. Feel free to reach out to me on my social media handles given on the side bar in the left.
+
+Happy Learning..!!
