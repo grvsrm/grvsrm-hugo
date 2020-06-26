@@ -32,5 +32,5 @@
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
  [[main]]
     name = "Resume"
-    url = "https://github.com/grvsrm/Resume/blob/master/CV_Gaurav%20Sharma%20RMD.pdf"
+    url = "static/files/Resume Gaurav S.pdf"
     weight = 70
