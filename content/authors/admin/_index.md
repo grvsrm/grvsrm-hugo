@@ -21,9 +21,9 @@ organizations:
 bio: My research interests include Manufacturing Analytics, Industry 4.0 and Factory Digitization.
 
 interests:
-- Manufacturing Analytics
-- Industry 4.0
 - Factories of the Future
+- Industry 4.0
+- Manufacturing Analytics
 
 education:
   courses:
@@ -31,7 +31,7 @@ education:
     institution: Indian School of Business, IN
     year: 2019
   - course: B.E. in Electronics & Communication
-    institution: Jaipur Engineering College & REsearch Centre, IN
+    institution: Jaipur Engineering College & Research Centre, IN
     year: 2008
 
 # Social/Academic Networking
@@ -53,8 +53,8 @@ social:
   link: https://github.com/grvsrm
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
-#- icon: cv
-#   icon_pack: ai
+- icon: file
+  icon_pack: fas
 #   link: "files/Resume Gaurav S.pdf"
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
