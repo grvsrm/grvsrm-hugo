@@ -57,4 +57,14 @@ date_format = "Jan 2006"
   date_start = "2020-03-01"
   date_end = ""
   description = ""
+
+[[item]]
+  organization = "Dale Carnegie"
+  organization_url = "https://www.dalecarnegie.com/en"
+  title = "Communication Edge"
+  url = "https://www.dalecarnegie.com/en/courses-v2/3732"
+  certificate_url = "https://www.dalecarnegie.com/en"
+  date_start = "2018-02-01"
+  date_end = ""
+  description = ""
 +++
