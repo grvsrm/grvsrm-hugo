@@ -18,37 +18,37 @@ subtitle = ""
   icon = "chart-bar"
   icon_pack = "fas"
   name = "Data Science"
-  description = "Analytics in Manufacturing & Industry"
+  description = ""
   
 [[feature]]
   icon = "laptop-code"
   icon_pack = "fas"
   name = "Machine Learning"
-  description = "Experienced in Modern ML tools and techniques"  
+  description = ""  
 
 [[feature]]
   icon = "chart-line"
   icon_pack = "fas"
   name = "Statistics"
-  description = "Loves to convert data into insights"  
+  description = ""  
 
 [[feature]]
   icon = "r-project"
   icon_pack = "fab"
   name = "R"
-  description = " Data..! Let's code in R"
+  description = ""
   
 [[feature]]
   icon = "industry"
   icon_pack = "fas"
   name = "Industry 4.0"
-  description = "Experienced in setting up smart factories"
+  description = ""
   
 [[feature]]
   icon = "project-diagram"
   icon_pack = "fas"
   name = "System Implementations"
-  description = "Years of experience in Project and Change Management"
+  description = ""
 
 # Uncomment to use emoji icons.
 # [[feature]]
