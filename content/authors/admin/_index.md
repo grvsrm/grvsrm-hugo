@@ -67,7 +67,6 @@ email: ""
 #- Visitors
 ---
 > Without data you're just another person with an opinion. 
-
 >                                                         - Edward J Deming 
 
 I am an Engineer and a Data Scientist. Before moving into Data Science, I spent a considerable time at Shop Floor in Automotive Industry. I am fairly exposed to Manufacturing and have a diversified work experienece in various domains ranging from Planning & Operations, Maintenance, IT etc; My recent work interests are into building [factories of the future](https://www.effra.eu/sites/default/files/factories_of_the_future_2020_roadmap.pdf).  My experience in implenmenting Industry 4.0 practices and Factory Digitization helps me a lot in pursuing my interest further. I have used data scinece to solve several business problems in Manufacturing. My inclination is more towards decision making using data rather than making data products.
