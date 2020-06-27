@@ -9,6 +9,6 @@ view: 2
 
 # Optional header image (relative to `static/img/` folder).
 header:
-  caption: ""
-  image: ""
+  caption: "A Classification Model on San Francisco Tree Dataset"
+  image: "SFTRee.jpg"
 ---
