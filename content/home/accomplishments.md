@@ -48,4 +48,13 @@ date_format = "Jan 2006"
   date_end = ""
   description = ""
 
+[[item]]
+  organization = "Coursera"
+  organization_url = "https://www.coursera.org"
+  title = "Digital Threads:Implementation"
+  url = "https://www.coursera.org/learn/digital-thread-implementation"
+  certificate_url = "https://www.coursera.org/account/accomplishments/certificate/EMSY9CEXFSXC"
+  date_start = "2020-03-01"
+  date_end = ""
+  description = ""
 +++
