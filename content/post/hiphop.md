@@ -1,3 +1,13 @@
+---
+title: "Modelling hip hop songs dataset using PCA"
+slug: "Modelling hip hop songs"
+date: 2020-01-03
+excerpt: "Modelling hip hop songs dataset using PCA"
+tags: [rstats]
+---
+
+
+
 Modelling hip hop songs dataset using PCA
 ================
 Gaurav Sharma
