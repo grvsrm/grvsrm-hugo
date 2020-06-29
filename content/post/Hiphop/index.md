@@ -5,6 +5,7 @@ summary: "Demostration of PCA algorithm used for dimensionality reduction for Mo
 tags: [rstats,PCA]
 date: 25-06-2020
 authors: ["admin"]
+share: false
 image:
   placement: 1
   caption: " Picture by Ben_Kerckx on Pixabay"
