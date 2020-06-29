@@ -1,5 +1,6 @@
 ---
 title: "Modelling hip hop songs dataset using PCA"
+subtitle: "An example of PCA based modelling approach"
 date: 2020-01-03
 tags: [rstats,PCA]
 ---
