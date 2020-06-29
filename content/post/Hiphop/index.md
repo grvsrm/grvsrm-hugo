@@ -3,6 +3,7 @@ title: "Modelling hip hop songs dataset using PCA"
 subtitle: "An example of PCA based modelling approach"
 summary: "Demostration of PCA algorithm used for dimensionality reduction for Modelling hip hop songs"
 tags: [rstats,PCA]
+authors: ["admin"]
 image:
   placement: 1
   caption: " Picture by Ben_Kerckx on Pixabay"
