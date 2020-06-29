@@ -8,7 +8,7 @@ authors: ["admin"]
 image:
   placement: 1
   caption: " Picture by Ben_Kerckx on Pixabay"
-  preview_only: true
+  preview_only: false
 ---
 
 
