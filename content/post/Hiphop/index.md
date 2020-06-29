@@ -9,9 +9,6 @@ image:
   placement: 1
   caption: " Picture by Ben_Kerckx on Pixabay"
   preview_only: true
-header:
-  image: "header.jpg"
-  caption: "Image credit: Becca Clark from Pixabay "
 ---
 
 
