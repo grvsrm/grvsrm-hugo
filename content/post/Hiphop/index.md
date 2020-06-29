@@ -342,4 +342,4 @@ summary(pca_lm)
     ## Multiple R-squared:  0.02864,    Adjusted R-squared:  0.01229 
     ## F-statistic: 1.751 on 5 and 297 DF,  p-value: 0.1228
 
-# That’s a small exercise to see how we can leverage the functionalities of PCA in our model
+### That’s a small exercise to see how we can leverage the functionalities of PCA in our model
