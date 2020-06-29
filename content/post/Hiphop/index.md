@@ -4,19 +4,8 @@ subtitle: "An example of PCA based modelling approach"
 summary: "Demostration of PCA algorithm used for dimensionality reduction for Modelling hip hop songs"
 date: 2020-01-03
 tags: [rstats,PCA]
-
-# Featured image
-# To use, place an image named `featured.jpg/png` in your page's folder.
-# Placement options: 1 = Full column width, 2 = Out-set, 3 = Screen-width
-# Focal point options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
-# Set `preview_only` to `true` to just use the image for thumbnails.
 image:
-  placement: 3
-  caption: "Image by <a href="https://pixabay.com/users/Ben_Kerckx-69781/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2223087">Ben   Kerckx</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2223087">Pixabay</a>"
-  focal_point: "Center"
   preview_only: false
-  alt_text: An optional description of the image for screen readers.
-
 ---
 
 
