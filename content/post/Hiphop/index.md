@@ -45,7 +45,7 @@ rankings %>%
     scale_y_log10()
 ```
 
-[](plots/unnamed-chunk-2-1.png)
+![Plot1](plots/unnamed-chunk-2-1.png)
 
 ``` r
 rankings %>% 
