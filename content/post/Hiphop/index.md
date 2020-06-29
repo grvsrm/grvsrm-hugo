@@ -8,8 +8,9 @@ image:
   placement: 3
   caption: " Picture by Ben_Kerckx on Pixabay"
   preview_only: false
-reading_time: true  # Show estimated reading time?
-share: true  # Show social sharing links?
+header:
+  image: "header.jpg"
+  caption: "Image credit: Becca Clark from Pixabay "
 ---
 
 
