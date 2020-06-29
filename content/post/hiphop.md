@@ -1,19 +1,17 @@
 ---
 title: "Modelling hip hop songs dataset using PCA"
-slug: "Modelling hip hop songs"
+subtitle: "An example of PCA based modelling approach"
+summary: "Demostration of PCA algorithm used for dimensionality reduction for Modelling hip hop songs"
 date: 2020-01-03
+authors: Gaurav Sharma
 excerpt: "Modelling hip hop songs dataset using PCA"
-tags: [rstats]
+tags: [rstats,PCA]
 ---
 
 
+This dataset was publisged in tidy tuesday a few days back, The data contains details of hiphop songs and their ratings given by few independent critics. Some other details about the critics are also given such as gender. Details such as year, title, artist has been given about the songs.
 
-Modelling hip hop songs dataset using PCA
-================
-Gaurav Sharma
-24/06/2020
-
-# Lets load the data
+### Lets load the data
 
 ``` r
 rankings <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-14/rankings.csv")
