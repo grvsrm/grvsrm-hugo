@@ -45,7 +45,7 @@ rankings %>%
     scale_y_log10()
 ```
 
-![](hiphop_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+[](plots/unnamed-chunk-2-1.png)
 
 ``` r
 rankings %>% 
