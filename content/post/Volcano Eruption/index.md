@@ -272,5 +272,5 @@ ggplot() +
 
 ![Volcano Pred Plot](plots/Volcano%20Pred%20Plot-1.png)
 
-Okay. So in this post, we used volcanic data to build a multinomial classification model to see if on the basis of demographic data and oter information about a volcano, how correctly can we predict the type of the eruption. We also built a use case around multiclass classification and used some performance metrics to evaulte the model effectiveness. 
+Okay. So in this post, we used volcanic data to build a multinomial classification model to see if on the basis of demographic data and oter information about a volcano, how correctly can we predict the type of the eruption. We also built a use case around multiclass classification and used some performance metrics to evaluate the model effectiveness. 
 I hope this helps. Thank you so much for reading. See you again in the next post..!!
