@@ -135,7 +135,8 @@ volcano_prep <- prep(volcano_rec)
 volcano_prep
 ```
 
-### Lets create a random forest model specification
+### Lets create a model spec
+Lets create a random forest model specification. We will set engine as ranger and mode as classification. We keep number of trees equal to 1000 to be grown.
 
 ``` r
 rf_spec <- rand_forest(trees = 1000) %>% 
@@ -144,6 +145,7 @@ rf_spec <- rand_forest(trees = 1000) %>%
 ```
 
 ### Lets create a workflow
+Workflow helps us in putting all the things together which in turn helps us in modelling faster. We are adding recipe and model specs heer to the model.
 
 ``` r
 volcano_wf <- workflow() %>% 
@@ -152,7 +154,8 @@ volcano_wf <- workflow() %>%
 ```
 
 ### Lets train the model
-
+We will train the model now using bootstrap resamples. Verbose argument is not necessary as in but it helps us in seeing the progress while random forest algorithm converges.
+ 
 ``` r
 volcano_res <- fit_resamples(volcano_wf, 
               resamples = volcano_boot,
@@ -162,7 +165,7 @@ volcano_res <- fit_resamples(volcano_wf,
 
 ### Explore results
 
-Let’s see how the model
+Let’s see how the model performs on th resampled data. Although area under the curve is ~79% still model doesn't have a good accuracy. It fares slightly better than a base model.
 
 ``` r
 volcano_res %>% 
@@ -174,6 +177,8 @@ volcano_res %>%
     ##   <chr>    <chr>      <dbl> <int>   <dbl>
     ## 1 accuracy multiclass 0.648    25 0.00506
     ## 2 roc_auc  hand_till  0.788    25 0.00414
+
+Lets have a look at the confusion atrix to see how model predicts different classes.
 
 ``` r
 volcano_res %>% 
@@ -187,6 +192,8 @@ volcano_res %>%
     ##   Shield           289    583           222
     ##   Stratovolcano   1236    193          3238
 
+We will also like to see the positive predicted value which is a useful meausre in multinomial classification models.
+
 ``` r
 volcano_res %>% 
     collect_predictions() %>% 
@@ -198,6 +205,7 @@ volcano_res %>%
     ##   <chr>   <chr>          <dbl>
     ## 1 ppv     macro          0.616
 
+We can check the ppv across various bootstraps to see how it behaves in different data samples. It doesn't change much, which indicates that model is not too sensitive too new data.
 ``` r
 volcano_res %>% 
     collect_predictions() %>% 
@@ -220,6 +228,8 @@ volcano_res %>%
     ## 10 Bootstrap10 ppv     macro          0.616
     ## # ... with 15 more rows
 
+It will also be interesting to see which variable is of more importance for the modle to correctly classify volcano eruptions. Let's plot a variable importance plot.
+
 ``` r
 library(vip)
 rf_spec %>%
@@ -233,6 +243,8 @@ rf_spec %>%
 
 ![VIP Plot](plots/Vip%20plot-1.png)
 
+Let's combine the predictions into a dataframe
+
 ``` r
 volcano_pred <- volcano_res %>% 
     collect_predictions() %>% 
@@ -241,7 +253,8 @@ volcano_pred <- volcano_res %>%
                   mutate(.row = row_number()))
 ```
 
-# Lets see how we fared in terms of predictions by plotting our predictions again on a world map
+### Let's check on the world map, how many of the valcanos can our model classify correctly.
+The map shows, how it fares in terms of predictions by plotting our predictions again on a world map.
 
 ``` r
 ggplot() +
@@ -258,3 +271,6 @@ ggplot() +
 ```
 
 ![Volcano Pred Plot](plots/Volcano%20Pred%20Plot-1.png)
+
+In this post, we used volcanic data to build a multinomial classification model to see if on the basis of demographic data and oter information about a volcano, how correctly can we predict the type of the eruption. We also built a use case around multiclass classification and used some performance metrics to evaulte the model effectiveness. 
+Thank you so much for reading. See you again in the next post..!!
