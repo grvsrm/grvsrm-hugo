@@ -14,7 +14,7 @@ image:
 
 NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned there. 
 
-I love doing data science in R. It is so easy to follow along when you work in R. In this post, we will talk about a volcano eruption datatset available [here](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv). This dataset talks about various types of volcanic eruptions that take place around the world. We are interested in understanding that by having demographic information present in data, Is it possible to correctly identify the type of the volcanic eruption. It is a multiclass or multinomial classification probelm and we will use random forest algorithm to train the model. Let's get started..!
+I love doing data science in R. It is so easy to follow along when you work in R. In this post, we will talk about a volcano eruption dataset available [here](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv). This dataset talks about various types of volcanic eruptions that take place around the world. We are interested in understanding that by having demographic information present in data, Is it possible to correctly identify the type of the volcanic eruption. It is a multiclass or multinomial classification probelm and we will use random forest algorithm to train the model. Let's get started..!
 
 Let's load the data and see what we have here.
 ``` r
@@ -60,7 +60,7 @@ volcano_raw %>%
     ## # ... with 16 more rows
 
 
-It shows that there are 26 different types of eruptions. Although it can be modelled to classify for all the 26 types but seeing the size of the data it maks more sense to group the eruptions in three categories. Lets take the first two categories and put rest of the data in "other" category to keep it simple.
+It shows that there are 26 different types of eruptions. Although it can be modelled to classify for all the 26 types but seeing the size of the data it makes more sense to group the eruptions in three categories. Lets take the first two categories and put rest of the data in "other" category to keep it simple.
 
 ``` r
 volcano_df <- volcano_raw %>% 
@@ -178,7 +178,7 @@ volcano_res %>%
     ## 1 accuracy multiclass 0.648    25 0.00506
     ## 2 roc_auc  hand_till  0.788    25 0.00414
 
-Lets have a look at the confusion atrix to see how model predicts different classes.
+Lets have a look at the confusion metrics to see how model predicts different classes.
 
 ``` r
 volcano_res %>% 
