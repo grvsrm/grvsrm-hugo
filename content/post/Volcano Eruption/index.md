@@ -1,14 +1,26 @@
-A multinomial classification model for Volcano Eruptions
-================
-Gaurav Sharma
-2020-06-30
+---
+title: "A Classification Model on Volcanic Eruptions in R"
+subtitle: "An example of Multinomial Classification uisng Random Forest and Tidymodels in R"
+summary: "An example of Multinomial Classification uisng Random Forest and Tidymodels in R"
+tags: [rstats,tidymodels,random forest, classification]
+date: 30-06-2020
+authors: ["admin"]
+share: false
+image:
+  placement: 1
+  caption: " Image by Julius Silver from Pixabay "
+  preview_only: false
+---
 
-### Lets laod the data
+NOTE: These days I am following [Julian Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned there. 
 
+I love doing data science in R. It is so easy to follow along when you work in R. In this post, we will talk about a volcano eruption datatset available [here](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv). This dataset talks about various types of volcanic eruptions that take place around the world. We are interested in understanding that by having demographic information present in data, Is it possible to correctly identify the type of the volcanic eruption. It is a multiclass or multinomial classification probelm and we will use random forest algorithm to train the model. Let's get started..!
+
+Let's load the data and see what we have here.
 ``` r
 volcano_raw <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv")
 volcano_raw %>% 
-    head(10) %>% 
+    head() %>% 
     knitr::kable()
 ```
 
@@ -26,7 +38,7 @@ volcano_raw %>%
 |          342100 | Agua            | Stratovolcano          | Unknown              | Guatemala     | México and Central America     | Guatemala                             |   14.465 |  \-90.743 |      3760 | Subduction zone / Continental crust (\>25 km) | Evidence Credible  | Andesite / Basaltic Andesite |                              |                         |                              |                | Dacite                |                                  |                              |                |                |                      9890 |                     114404 |                    2530449 |                     7441660 |
 
 ### Lets now explore the data
-
+We will check the different type of volcanic eruptions that are given in the dataset. We see that there are 26 types of eruptions listed here.
 ``` r
 volcano_raw %>% 
     count(primary_volcano_type, sort = T)
@@ -47,7 +59,8 @@ volcano_raw %>%
     ## 10 Lava dome(s)            26
     ## # ... with 16 more rows
 
-### It shows that there are 26 different types of valcanos. We will group them in three categories
+
+It shows that there are 26 different types of eruptions. Although it can be modelled to classify for all the 26 types but seeing the size of the data it maks more sense to group the eruptions in three categories. Lets take the first two categories and put rest of the data in "other" category to keep it simple.
 
 ``` r
 volcano_df <- volcano_raw %>% 
@@ -58,7 +71,8 @@ volcano_df <- volcano_raw %>%
     mutate_if(is.character, factor)
 ```
 
-### Since we have spatial data, Lets see where these volcanos are situated on a map
+### Lets plot some visualizations
+Since we have spatial data, Lets see where these volcanos are situated on a world map. We will put these volcanos on their location and will color them according to the volcanic type. Let's see, how it looks..!
 
 ``` r
 world <- map_data("world")
@@ -73,9 +87,12 @@ ggplot() +
     scale_y_continuous(labels = NULL) 
 ```
 
-![](volcano_files/figure-gfm/Volcano%20Map-1.png)<!-- -->
+![](plots/Volcano Map-1.png)<!-- -->
 
-### Rater than creating a split we will create resamples as we don’t have much data
+It looks like these volcanos create a ring of fire around the pacific ocean. Also, they are spreaded all over the world but we can see most of them in coastal areas.
+
+### Let's prepare the data
+Rater than creating a split we will create bootstrap resamples as we don’t have much data. Hence resampling will help in preventing the model from overfitting and will also give us a robust fit. 
 
 ``` r
 volcano_boot <- volcano_df %>% 
@@ -99,10 +116,8 @@ volcano_boot
     ## 10 <split [958/368]> Bootstrap10
     ## # ... with 15 more rows
 
-### We will create a recipe now. We will use smote analysis to overcome class imbalance
-
-smote() function is a part of themis package. So, remember to load
-themis package before creating recipe.
+### Let's pre-process the data
+We will create a recipe now. We will use smote analysis to overcome class imbalance. smote() function is a part of themis package. So, remember to load themis package before creating recipe. We will also remove volcano number as it is not useful in modelling. We will group the less frequent classes and put them into a class called 'other'. We will do the same thing with major_rock_1 variable also. Then we will create dummy variable for all categorical variables. will remove zero variance variable and normalize the numerical variable 
 
 ``` r
 library(themis)
@@ -117,6 +132,7 @@ volcano_rec <- recipe(volcano_type~., data = volcano_df) %>%
     step_smote(volcano_type)
 
 volcano_prep <- prep(volcano_rec)
+volcano_prep
 ```
 
 ### Lets create a random forest model specification
@@ -215,7 +231,7 @@ rf_spec %>%
     vip(geom = "point")
 ```
 
-![](volcano_files/figure-gfm/Vip%20plot-1.png)<!-- -->
+![](plots/Vip plot-1.png)<!-- -->
 
 ``` r
 volcano_pred <- volcano_res %>% 
@@ -241,4 +257,4 @@ ggplot() +
     scale_fill_gradient(high = "cyan3", labels = scales::percent)
 ```
 
-![](volcano_files/figure-gfm/Volcano%20Pred%20Plot-1.png)<!-- -->
+![](plots/Volcano Pred Plot-1.png)<!-- -->
