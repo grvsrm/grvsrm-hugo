@@ -205,7 +205,7 @@ volcano_res %>%
     ##   <chr>   <chr>          <dbl>
     ## 1 ppv     macro          0.616
 
-We can check the ppv across various bootstraps to see how it behaves in different data samples. It doesn't change much, which indicates that model is not too sensitive too new data.
+We can check the ppv across various bootstraps to see how it behaves in different data samples. It doesn't change much, which indicates that model is not too sensitive to the new data.
 ``` r
 volcano_res %>% 
     collect_predictions() %>% 
