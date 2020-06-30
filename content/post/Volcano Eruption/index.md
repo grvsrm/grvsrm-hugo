@@ -12,7 +12,7 @@ image:
   preview_only: false
 ---
 
-NOTE: These days I am following [Julian Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned there. 
+NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned there. 
 
 I love doing data science in R. It is so easy to follow along when you work in R. In this post, we will talk about a volcano eruption datatset available [here](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv). This dataset talks about various types of volcanic eruptions that take place around the world. We are interested in understanding that by having demographic information present in data, Is it possible to correctly identify the type of the volcanic eruption. It is a multiclass or multinomial classification probelm and we will use random forest algorithm to train the model. Let's get started..!
 
@@ -87,7 +87,7 @@ ggplot() +
     scale_y_continuous(labels = NULL) 
 ```
 
-![](plots/Volcano Map-1.png)<!-- -->
+![Volcano Map](plots/Volcano Map-1.png)
 
 It looks like these volcanos create a ring of fire around the pacific ocean. Also, they are spreaded all over the world but we can see most of them in coastal areas.
 
@@ -231,7 +231,7 @@ rf_spec %>%
     vip(geom = "point")
 ```
 
-![](plots/Vip plot-1.png)<!-- -->
+![VIP Plot](plots/Vip plot-1.png)
 
 ``` r
 volcano_pred <- volcano_res %>% 
@@ -257,4 +257,4 @@ ggplot() +
     scale_fill_gradient(high = "cyan3", labels = scales::percent)
 ```
 
-![](plots/Volcano Pred Plot-1.png)<!-- -->
+![Volcano Pred Plot](plots/Volcano Pred Plot-1.png)
