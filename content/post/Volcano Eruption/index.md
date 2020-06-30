@@ -1,7 +1,7 @@
 ---
 title: "A Classification Model on Volcanic Eruptions in R"
-subtitle: "An example of Multinomial Classification uisng Random Forest and Tidymodels in R"
-summary: "An example of Multinomial Classification uisng Random Forest and Tidymodels in R"
+subtitle: "An example of Multinomial Classification using Random Forest and Tidymodels in R"
+summary: "An example of Multinomial Classification using Random Forest and Tidymodels in R"
 tags: [rstats,tidymodels,random forest, classification]
 date: 30-06-2020
 authors: ["admin"]
