@@ -5,7 +5,7 @@ Copyright and Licenese info can be found at the bottom of this page.
 
 The intent behind creating this to showcase my work in data science. Whatever I do, I have put it here in the form of small blog posts. In case you want to reach out to me, a contact form is available in the bottom of my website. 
 
-To visit the website [Gaurav Sharma](https://grvsrm.github.io)
+To visit the website [Gaurav Sharma](https://gauravsharma.netlify.app/)
 
 
 ### License
