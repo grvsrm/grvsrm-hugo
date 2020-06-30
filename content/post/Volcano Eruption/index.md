@@ -165,7 +165,7 @@ volcano_res <- fit_resamples(volcano_wf,
 
 ### Explore results
 
-Let’s see how the model performs on th resampled data. Although area under the curve is ~79% still model doesn't have a good accuracy. It fares slightly better than a base model.
+Let’s see how the model performs on the resampled data. Although area under the curve is ~79% still model doesn't have a good accuracy. It fares slightly better than a base model.
 
 ``` r
 volcano_res %>% 
@@ -192,7 +192,7 @@ volcano_res %>%
     ##   Shield           289    583           222
     ##   Stratovolcano   1236    193          3238
 
-We will also like to see the positive predicted value which is a useful meausre in multinomial classification models.
+We will also like to see the positive predicted value which is a useful measure in multinomial classification models.
 
 ``` r
 volcano_res %>% 
@@ -272,5 +272,5 @@ ggplot() +
 
 ![Volcano Pred Plot](plots/Volcano%20Pred%20Plot-1.png)
 
-In this post, we used volcanic data to build a multinomial classification model to see if on the basis of demographic data and oter information about a volcano, how correctly can we predict the type of the eruption. We also built a use case around multiclass classification and used some performance metrics to evaulte the model effectiveness. 
-Thank you so much for reading. See you again in the next post..!!
+Okay. So in this post, we used volcanic data to build a multinomial classification model to see if on the basis of demographic data and oter information about a volcano, how correctly can we predict the type of the eruption. We also built a use case around multiclass classification and used some performance metrics to evaulte the model effectiveness. 
+I hope this helps. Thank you so much for reading. See you again in the next post..!!
