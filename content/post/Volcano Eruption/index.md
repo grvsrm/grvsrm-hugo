@@ -37,7 +37,7 @@ volcano_raw %>%
 |          284160 | Agrigan         | Stratovolcano          | 1917                 | United States | Japan, Taiwan, Marianas        | Izu, Volcano, and Mariana Islands     |   18.770 |   145.670 |       965 | Subduction zone / Crustal thickness unknown   | Eruption Observed  | Basalt / Picro-Basalt        | Andesite / Basaltic Andesite |                         |                              |                |                       |                                  |                              |                |                |                         0 |                          0 |                          0 |                           0 |
 |          342100 | Agua            | Stratovolcano          | Unknown              | Guatemala     | México and Central America     | Guatemala                             |   14.465 |  \-90.743 |      3760 | Subduction zone / Continental crust (\>25 km) | Evidence Credible  | Andesite / Basaltic Andesite |                              |                         |                              |                | Dacite                |                                  |                              |                |                |                      9890 |                     114404 |                    2530449 |                     7441660 |
 
-### Lets now explore the data
+### Now, Let's explore the data
 We will check the different type of volcanic eruptions that are given in the dataset. We see that there are 26 types of eruptions listed here.
 ``` r
 volcano_raw %>% 
