@@ -87,7 +87,7 @@ ggplot() +
     scale_y_continuous(labels = NULL) 
 ```
 
-![Volcano Map](plots/Volcano Map-1.png)
+![Volcano Map](plots/Volcano%20Map-1.png)
 
 It looks like these volcanos create a ring of fire around the pacific ocean. Also, they are spreaded all over the world but we can see most of them in coastal areas.
 
