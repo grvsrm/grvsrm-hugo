@@ -92,7 +92,7 @@ ggplot() +
 It looks like these volcanos create a ring of fire around the pacific ocean. Also, they are spreaded all over the world but we can see most of them in coastal areas.
 
 ### Let's prepare the data
-Rater than creating a split we will create bootstrap resamples as we don’t have much data. Hence resampling will help in preventing the model from overfitting and will also give us a robust fit. 
+Rather than creating a split we will create bootstrap resamples as we don’t have much data. Hence resampling will help in preventing the model from overfitting and will also give us a robust fit. 
 
 ``` r
 volcano_boot <- volcano_df %>% 
