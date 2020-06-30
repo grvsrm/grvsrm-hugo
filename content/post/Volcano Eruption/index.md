@@ -228,7 +228,7 @@ volcano_res %>%
     ## 10 Bootstrap10 ppv     macro          0.616
     ## # ... with 15 more rows
 
-It will also be interesting to see which variable is of more importance for the modle to correctly classify volcano eruptions. Let's plot a variable importance plot.
+It will also be interesting to see which variable is of more importance for the model to correctly classify volcano eruptions. Let's plot a variable importance plot.
 
 ``` r
 library(vip)
