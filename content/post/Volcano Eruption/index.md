@@ -231,7 +231,7 @@ rf_spec %>%
     vip(geom = "point")
 ```
 
-![VIP Plot](plots/Vip plot-1.png)
+![VIP Plot](plots/Vip%20plot-1.png)
 
 ``` r
 volcano_pred <- volcano_res %>% 
@@ -257,4 +257,4 @@ ggplot() +
     scale_fill_gradient(high = "cyan3", labels = scales::percent)
 ```
 
-![Volcano Pred Plot](plots/Volcano Pred Plot-1.png)
+![Volcano Pred Plot](plots/Volcano%20Pred%20Plot-1.png)
