@@ -4,6 +4,7 @@ title: "A XGBoost Classification Model on Beach Volleyball in R"
 subtitle: "An example of XGBoost Classification using Random Forest and Tidymodels in R"
 summary: "An example of XGBoost Classification using Random Forest and Tidymodels in R"
 tags: [rstats,tidymodels,xgboost, classification]
+lastmod: false
 date: 02-07-2020
 authors: ["admin"]
 share: false
