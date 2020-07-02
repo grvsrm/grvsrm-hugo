@@ -11,7 +11,7 @@ share: false
 categories: ["Machine Learning"]
 image:
   placement: 1
-  caption: "Image by H. B. from Pixabay"
+  caption: "Image by valentinaalemanno from Pixabay "
   preview_only: false
 ---
 
