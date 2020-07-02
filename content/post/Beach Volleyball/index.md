@@ -235,7 +235,7 @@ Finally, we have created two separate data frames for winner and losers and then
 
 ### Lets perform some EDA
 
-We can plot some visualizations to check if these varaibles are good enough to differntiate the two classes i.e. win and loss. 
+We can plot some visualizations to check if these varaibles are good enough to differentiate the two classes i.e. win and loss. 
 
 ``` r
 vb_df %>%
@@ -276,7 +276,16 @@ vb_df %>%
 These boxplots confirm that some of the features such as kills, errors, attacks are good predictors of outcome class. It is evident visually, we will confirm our hypothesis while modelling.
 
 ### Build a model
+As we are going to build a xgboost model so there is no separate need to pre-process the data. The algorithm takes care of nominal variables bu dummifying them and normalizing the numerical variables. Hence we will do following things now in order to build the model
 
+* We will create a split
+* We will create model specs
+* We will create gris for model tuning
+* We will create a workflow for systematic process flow
+* We will also create resamples using k-fold cross validation for effective tuning.
+* Finally we will train the model
+
+### Data Split
 ``` r
 set.seed(123)
 vb_split <- vb_df %>% 
@@ -289,6 +298,9 @@ vb_split
 
     ## <Analysis/Assess/Total>
     ## <21498/7166/28664>
+
+### Model Spec
+In arguments we have defined parameters but have not specified any value as we are going to find the best hyper parameters by tuning the model.
 
 ``` r
 xgb_spec <- boost_tree(
@@ -318,6 +330,8 @@ xgb_spec
     ##   sample_size = tune()
     ## 
     ## Computational engine: xgboost
+
+### Tuning Grid using Hypercube
 
 ``` r
 xgb_grid <- grid_latin_hypercube(tree_depth(),
@@ -354,6 +368,7 @@ xgb_grid
     ## 19          8    15       1.02e-10       0.713    10   4.86e- 2
     ## 20         14    28       4.07e- 6       0.274     6   1.62e- 2
 
+### Model Workflow
 ``` r
 xgb_wf <- workflow() %>%
   add_formula(win ~ .) %>%
@@ -382,6 +397,8 @@ xgb_wf
     ## 
     ## Computational engine: xgboost
 
+### k-fold Cross Validation for resampling
+
 ``` r
 set.seed(123)
 vb_folds <- vfold_cv(vb_train, strata = win)
@@ -403,6 +420,9 @@ vb_folds
     ##  9 <split [19.3K/2.1K]> Fold09
     ## 10 <split [19.4K/2.1K]> Fold10
 
+### Setting Parallel environment for fasterprocessing and fitting the model
+XGBoost is a computationally intensive algorithm, henceit is always better to use parallel processing to save on somme time. Argument verbose = T is optional , It simply shows the process of fitting in R console so you can see the progress of model convergence.
+
 ``` r
 doParallel::registerDoParallel()
 set.seed(234)
@@ -415,6 +435,7 @@ xgb_res <- tune_grid(
 ```
 
 ### Explore the results
+Lets see what are the hyperparameters that yield best AUC value.
 
 ``` r
 best_auc <- xgb_res %>% 
@@ -433,6 +454,8 @@ best_auc
     ## # ... with 4 more variables: .estimator <chr>, mean <dbl>, n <int>,
     ## #   std_err <dbl>
 
+Similarly, Lets see what are the hyperparameters that yield best Accuracy.
+
 ``` r
 best_acc <- xgb_res %>% 
   show_best(metric = "accuracy")
@@ -450,6 +473,9 @@ best_acc
     ## # ... with 4 more variables: .estimator <chr>, mean <dbl>, n <int>,
     ## #   std_err <dbl>
 
+### Visualize the results
+We can visually see how average performace of the model in terms of AUC changed for different values of model parameters converged. 
+
 ``` r
 xgb_res %>%
   collect_metrics() %>%
@@ -463,7 +489,7 @@ xgb_res %>%
   facet_wrap( ~ parameter, scales = "free_x") 
 ```
 
-![](volleyball_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![Model Perf 1](plots/Model%20Perf%201.png)<!-- -->
 
 ``` r
 xgb_res %>%
@@ -477,9 +503,9 @@ xgb_res %>%
        title = "Accuracy & AUC trends for different trials")  
 ```
 
-![](volleyball_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![Model Perf 2](plots/Model%20Perf%202.png)<!-- -->
 
-# Let’s select the best hyperparameter based on best roc\_auc
+### Selecting the best hyperparameter based on best roc_auc and finalize the workflow
 
 ``` r
 best_auc <- xgb_res %>% 
@@ -512,6 +538,9 @@ final_xgb
     ## 
     ## Computational engine: xgboost
 
+### Variable Importance Metrics
+It will be interesting to see which variable according the model are of high importance in predicting the outcome.
+
 ``` r
 library(vip)
 
@@ -521,7 +550,12 @@ final_xgb %>%
   vip(geom = "point")
 ```
 
-![](volleyball_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![VIP Plot](plots/VIP%20Plot.png)<!-- -->
+
+VIP plot suggests that kills, errors, attacks, blocks, digs are the most important variable. If you remember this was our hypothesis before building the model. Hence it confirms our hypothesis. 
+
+### Training and TEsting Final Model
+Finally, we will train our final model again on the whole training data and will test on test data. Final Model Performance is as follows:
 
 ``` r
 final_res <- final_xgb %>% 
@@ -539,6 +573,10 @@ final_metric
     ## 1 accuracy binary         0.842
     ## 2 roc_auc  binary         0.927
 
+Final model performas more or less similar to training which indicates there is no overfitting and we are good to go further.
+
+### Confusion Metric
+
 ``` r
 final_conf_mat <- final_res %>% 
   collect_predictions() %>% 
@@ -552,6 +590,8 @@ final_conf_mat
     ##       lose 2967  513
     ##       win   616 3070
 
+### ROC AUC Curve Plot
+
 ``` r
 final_res %>% 
   collect_predictions() %>% 
@@ -559,12 +599,13 @@ final_res %>%
   autoplot()
 ```
 
-![](volleyball_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![Final AUC](plots/Final%20AUC.png)<!-- -->
 
-# Lets save our data and objects
+# Save our data and objects
+Although this is not a necessary step in modelling but it is good practice to save the .Robjects as it saves time when we load the model next time. We simply can load all the objects back again rather than creating them again in next session.
 
 ``` r
 save.image(file = "allobjects.RData")
 ```
 
-Finish
+We did it. We created a XGBoost Model to predict win in a beach volleyball match. We tuned hyperparameters using a standard tidymodels workflow and measured the performace of the model which is pretty good in this case. I hope this helps. Thank you so much for reading. See you again in the next post..!!
