@@ -1,10 +1,23 @@
-A XGBoost Classification Model on Beach Volleyball
-================
-Gaurav Sharma
-01/07/2020
 
+---
+title: "A XGBoost Classification Model on Beach Volleyball in R"
+subtitle: "An example of XGBoost Classification using Random Forest and Tidymodels in R"
+summary: "An example of XGBoost Classification using Random Forest and Tidymodels in R"
+tags: [rstats,tidymodels,xgboost, classification]
+date: 02-07-2020
+authors: ["admin"]
+share: false
+image:
+  placement: 1
+  caption: "Image by H. B. from Pixabay"
+  preview_only: false
+---
+
+NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned from her. You can find a screencast of her vidoes [here](https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA)
+
+Beach Volleyball matches are quite popular around the world. This dataset contains a huge record of beach volleyball matches. 
 ### Let’s load the dataset
-
+ 
 ``` r
 vb_matches <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-19/vb_matches.csv', guess_max = 76000)
 
