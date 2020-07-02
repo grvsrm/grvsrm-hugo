@@ -19,9 +19,9 @@ NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learn
 
 [Beach volleyball](https://en.wikipedia.org/wiki/Beach_volleyball) is a team sport played by two teams of two players on a sand court divided by a net. As in indoor volleyball, the objective of the game is to send the ball over the net and to ground it on the opponent's side of the court, and to prevent the same effort by the opponent. Beach Volleyball matches are quite popular around the world. The game holds high popularity in countries such as US and Brazil. Beach volleyball most likely originated in 1915 on Waikiki Beach in Hawaii, while the modern two-player game originated in Santa Monica, California. It has been an Olympic sport since the 1996 Summer Olympics.
 
-This dataset contains a huge record of beach volleyball matches. There are approximately 76500 rows in this dataset. Each row contains statistics of one match. Some of the important features available in the data are gender, stats related to winners and losers, macth outcome, date, player details etc;
+This dataset contains a huge record of beach volleyball matches. There are approximately 76500 rows in this dataset. Each row contains statistics of one match. Some of the important features available in the data are gender, stats related to winners and losers, match outcome, date, player details etc;
 
-The objective of this modelling exercise is to predict the outcome of the match using information available. It is a binary classification problem and we have several ways to handle such problems, however, in this exercise we will xgboost algorithm for classification. Let's get started.
+The objective of this modelling exercise is to predict the outcome of the match using information available. It is a binary classification problem and we have several ways to handle such problems, however, in this exercise we will use xgboost algorithm for classification. Let's get started.
 
 ### Let’s load the dataset
 
@@ -42,11 +42,11 @@ vb_matches %>%
 | AVP     | Huntington Beach | United States | 2002 | 2002-05-24 | M      |          5 | Albert Hannemann | 1970-05-04       |   32.05476 |         75 | United States  | Jeff Nygaard   | 1972-08-03       |   29.80424 |         80 | United States  | 5       | Adam Roberts  | 1976-01-25       |   26.32717 |         73 | United States  | Jim Walls             | 1978-03-26       |   24.16153 |         75 | United States  | 28      | 20-22, 23-21, 15-10 | 01:08:00 | Winner’s Bracket | Round 1 |                  NA |                NA |                 NA |                 NA |                1 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  6 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  1 |               NA |
 | AVP     | Huntington Beach | United States | 2002 | 2002-05-24 | M      |          6 | Jason Ring       | 1974-07-21       |   27.84120 |         75 | United States  | Paul Baxter    | 1972-02-01       |   30.30801 |         77 | United States  | 12      | Eli Fairfield | 1979-02-10       |   23.28268 |         NA | United States  | Juan Rodriguez Ibarra | 1969-05-30       |   32.98289 |         76 | Mexico         | 21      | 21-15, 16-21, 15-11 | 00:55:00 | Winner’s Bracket | Round 1 |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |
 
-You will see guessmax argument in read_csv here. A default property of read_csv is to guess the type of column by looking at the data in these columns. Generally it tries to detect the type by looking at forst few rows in each column. guess_max controls that how many rows it should see before it assigns a type to the column.
+You will see guess_max argument in read_csv here. A default property of read_csv is to guess the type of column by looking at the data in these columns. Generally it tries to detect the type by looking at first few rows in each column. guess_max controls how many rows it should see before it assigns a type to the column.
 
 ### Let’s explore the dataset
 
-We will use skim function to understand te data. As you can see we have 76756 rows with 65 variables. These are moderately large number of variables. We have charcater, numeric and date variables. We can see lot of missing data, hence it makes sense to explore missing data separately.
+We will use skim function to understand the data. As you can see we have 76756 rows with 65 variables. These are moderately large number of variables. We have character, numeric and date variables. We can see lot of missing data, hence it makes sense to explore missing data separately.
 
 ``` r
 skimr::skim(vb_matches)
@@ -153,7 +153,7 @@ Data summary
 | l\_p2\_tot\_blocks        |      60560 |           0.21 |    1.06 |  1.56 |    0.00 |    0.00 |    0.00 |    2.00 |   13.00 | ▇▁▁▁▁ |
 | l\_p2\_tot\_digs          |      62178 |           0.19 |    7.14 |  5.18 |    0.00 |    3.00 |    6.00 |   10.00 |   41.00 | ▇▃▁▁▁ |
 
-We will explore the missingdata now. We can use dataexplorer package to explore missing data as provides some very uesful visual summaries of the dataset.
+We will explore the missing data now. We can use dataexplorer package to explore missing data as it provides some very useful visual summaries of the dataset.
 
 ``` r
 DataExplorer::plot_str(vb_matches)
@@ -173,7 +173,7 @@ DataExplorer::plot_missing(vb_matches)
 
 We will do some transformations to make the data modelling ready. 
 * We should merge player 1 and player 2 stats for both winners and losers and treat it as one column.
-* We should use gender, circuit and year variables and drop rest for now
+* We should use gender, circuit and year variables and drop rest of the columns for now
 
 ``` r
 vb_parsed <- vb_matches %>%
@@ -231,11 +231,11 @@ vb_df %>%
 | AVP     | M      | 2004 |      44 |    31 |      1 |    0 |             5 |      6 |   15 | win |
 | AVP     | M      | 2004 |      55 |    31 |      6 |    0 |             4 |      8 |   22 | win |
 
-Finally, we have created two separate data frames for winner and losers and then combined them by binding rows. Our final dataframe is ready. We can use it for modelling now. It contains 28664 rows and 11 columns. Rows are lesser than the raw data as we have straight away removed missing values. Sample size s still large enough to perform modelling. 
+Finally, we have created two separate data frames for winner and losers and then combined them by binding rows. Our final dataframe is ready. We can use it for modelling now. It contains 28664 rows and 11 columns. Rows are lesser than the raw data as we have straight away removed missing values. Sample size is still large enough to perform modelling. 
 
 ### Lets perform some EDA
 
-We can plot some visualizations to check if these varaibles are good enough to differentiate the two classes i.e. win and loss. 
+We can plot some visualizations to check if these variables are good enough to differentiate the two classes i.e. win and loss. 
 
 ``` r
 vb_df %>%
@@ -273,14 +273,14 @@ vb_df %>%
 
 ![EDA 2](plots/EDA%202.png)<!-- -->
 
-These boxplots confirm that some of the features such as kills, errors, attacks are good predictors of outcome class. It is evident visually, we will confirm our hypothesis while modelling.
+These boxplots confirm that some of the features such as kills, errors, attacks are good predictors of outcome class. It is evident visually, So we will confirm our hypothesis while modelling.
 
 ### Build a model
-As we are going to build a xgboost model so there is no separate need to pre-process the data. The algorithm takes care of nominal variables bu dummifying them and normalizing the numerical variables. Hence we will do following things now in order to build the model
+As we are going to build a xgboost model so there is no separate need to pre-process the data. The algorithm takes care of nominal variables by dummifying them and normalizing the numerical variables. Hence we will do following things now in order to build the model
 
 * We will create a split
 * We will create model specs
-* We will create gris for model tuning
+* We will create grid for model tuning
 * We will create a workflow for systematic process flow
 * We will also create resamples using k-fold cross validation for effective tuning.
 * Finally we will train the model
@@ -420,8 +420,8 @@ vb_folds
     ##  9 <split [19.3K/2.1K]> Fold09
     ## 10 <split [19.4K/2.1K]> Fold10
 
-### Setting Parallel environment for fasterprocessing and fitting the model
-XGBoost is a computationally intensive algorithm, henceit is always better to use parallel processing to save on somme time. Argument verbose = T is optional , It simply shows the process of fitting in R console so you can see the progress of model convergence.
+### Setting Parallel environment for faster processing and fitting the model
+XGBoost is a computationally intensive algorithm, hence it is always better to use parallel processing to save on some time. Argument verbose = T is optional , It simply shows the progress of model fitting in R console so you can see the progress of model convergence.
 
 ``` r
 doParallel::registerDoParallel()
@@ -474,7 +474,7 @@ best_acc
     ## #   std_err <dbl>
 
 ### Visualize the results
-We can visually see how average performace of the model in terms of AUC changed for different values of model parameters converged. 
+We can visually see how average performance of the model in terms of AUC changed for different values of model parameters during convergence. 
 
 ``` r
 xgb_res %>%
@@ -505,7 +505,8 @@ xgb_res %>%
 
 ![Model Perf 2](plots/Model%20Perf%202.png)<!-- -->
 
-### Selecting the best hyperparameter based on best roc_auc and finalize the workflow
+### Select best hyper parameter
+We will select the best hyperparameter based on best roc_auc and finalize the workflow
 
 ``` r
 best_auc <- xgb_res %>% 
@@ -554,7 +555,7 @@ final_xgb %>%
 
 VIP plot suggests that kills, errors, attacks, blocks, digs are the most important variable. If you remember this was our hypothesis before building the model. Hence it confirms our hypothesis. 
 
-### Training and TEsting Final Model
+### Training and Testing Final Model
 Finally, we will train our final model again on the whole training data and will test on test data. Final Model Performance is as follows:
 
 ``` r
@@ -573,7 +574,7 @@ final_metric
     ## 1 accuracy binary         0.842
     ## 2 roc_auc  binary         0.927
 
-Final model performas more or less similar to training which indicates there is no overfitting and we are good to go further.
+Final model performs more or less similar to training which indicates there is no overfitting and we are good to go further.
 
 ### Confusion Metric
 
@@ -601,11 +602,11 @@ final_res %>%
 
 ![Final AUC](plots/Final%20AUC.png)<!-- -->
 
-# Save our data and objects
+### Save our data and objects
 Although this is not a necessary step in modelling but it is good practice to save the .Robjects as it saves time when we load the model next time. We simply can load all the objects back again rather than creating them again in next session.
 
 ``` r
 save.image(file = "allobjects.RData")
 ```
 
-We did it. We created a XGBoost Model to predict win in a beach volleyball match. We tuned hyperparameters using a standard tidymodels workflow and measured the performace of the model which is pretty good in this case. I hope this helps. Thank you so much for reading. See you again in the next post..!!
+We did it..!! We created a XGBoost Model to predict win in a beach volleyball match. We tuned hyperparameters using a standard tidymodels workflow and measured the performance of the model which is pretty good in this case. I hope this helps. Thank you so much for reading. See you again in the next post..!!
