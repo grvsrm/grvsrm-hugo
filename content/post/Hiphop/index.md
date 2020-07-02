@@ -4,6 +4,7 @@ subtitle: "An example of PCA based modelling approach"
 summary: "Demostration of PCA algorithm used for dimensionality reduction for Modelling hip hop songs"
 tags: [rstats,PCA]
 date: 25-06-2020
+categories: ["Machine Learning"]
 authors: ["admin"]
 share: false
 image:
