@@ -45,6 +45,7 @@ vb_matches %>%
 You will see guessmax argument in read_csv here. A default property of read_csv is to guess the type of column by looking at the data in these columns. Generally it tries to detect the type by looking at forst few rows in each column. guess_max controls that how many rows it should see before it assigns a type to the column.
 
 ### Let’s explore the dataset
+
 We will use skim function to understand te data. As you can see we have 76756 rows with 65 variables. These are moderately large number of variables. We have charcater, numeric and date variables. We can see lot of missing data, hence it makes sense to explore missing data separately.
 
 ``` r
@@ -168,7 +169,8 @@ DataExplorer::plot_missing(vb_matches)
 
 ![Missing 2](Plots/Missing%20Plot%202.png)
 
-# Prepare data
+### Prepare data
+
 We will do some transformations to make the data modelling ready. 
 * We should merge player 1 and player 2 stats for both winners and losers and treat it as one column.
 * We should use gender, circuit and year variables and drop rest for now
@@ -231,7 +233,8 @@ vb_df %>%
 
 Finally, we have created two separate data frames for winner and losers and then combined them by binding rows. Our final dataframe is ready. We can use it for modelling now. It contains 28664 rows and 11 columns. Rows are lesser than the raw data as we have straight away removed missing values. Sample size s still large enough to perform modelling. 
 
-# Lets perform some EDA
+### Lets perform some EDA
+
 We can plot some visualizations to check if these varaibles are good enough to differntiate the two classes i.e. win and loss. 
 
 ``` r
@@ -250,7 +253,7 @@ vb_df %>%
        color = NULL)
 ```
 
-![](volleyball_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![EDA 1](plots/EDA%201.png)<!-- -->
 
 ``` r
 vb_df %>%
@@ -268,7 +271,7 @@ vb_df %>%
        color = NULL)
 ```
 
-![](volleyball_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![EDA 2](plots/EDA%202.png)<!-- -->
 
 These boxplots confirm that some of the features such as kills, errors, attacks are good predictors of outcome class. It is evident visually, we will confirm our hypothesis while modelling.
 
