@@ -1,8 +1,8 @@
 
 ---
 title: "A XGBoost Classification Model on Beach Volleyball in R"
-subtitle: "An example of XGBoost Classification using Random Forest and Tidymodels in R"
-summary: "An example of XGBoost Classification using Random Forest and Tidymodels in R"
+subtitle: "An example of Classification using XGBoost and Tidymodels in R"
+summary: "An example of Classification using XGBoost and Tidymodels in R"
 tags: [rstats,tidymodels,xgboost, classification]
 lastmod: false
 date: 02-07-2020
@@ -21,10 +21,10 @@ NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learn
 
 This dataset contains a huge record of beach volleyball matches. There are approximately 76500 rows in this dataset. Each row contains statistics of one match. Some of the important features available in the data are gender, stats related to winners and losers, macth outcome, date, player details etc;
 
-The objective of this modelling exercise is to predict the outcome of the match using information available. It is a binary classification problem and we have several ways to handle such problems, however, in this exercise we will xgboost algorithm for classification. Let's get started
+The objective of this modelling exercise is to predict the outcome of the match using information available. It is a binary classification problem and we have several ways to handle such problems, however, in this exercise we will xgboost algorithm for classification. Let's get started.
 
 ### Let’s load the dataset
- 
+
 ``` r
 vb_matches <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-19/vb_matches.csv', guess_max = 76000)
 
@@ -42,7 +42,10 @@ vb_matches %>%
 | AVP     | Huntington Beach | United States | 2002 | 2002-05-24 | M      |          5 | Albert Hannemann | 1970-05-04       |   32.05476 |         75 | United States  | Jeff Nygaard   | 1972-08-03       |   29.80424 |         80 | United States  | 5       | Adam Roberts  | 1976-01-25       |   26.32717 |         73 | United States  | Jim Walls             | 1978-03-26       |   24.16153 |         75 | United States  | 28      | 20-22, 23-21, 15-10 | 01:08:00 | Winner’s Bracket | Round 1 |                  NA |                NA |                 NA |                 NA |                1 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  6 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  1 |               NA |
 | AVP     | Huntington Beach | United States | 2002 | 2002-05-24 | M      |          6 | Jason Ring       | 1974-07-21       |   27.84120 |         75 | United States  | Paul Baxter    | 1972-02-01       |   30.30801 |         77 | United States  | 12      | Eli Fairfield | 1979-02-10       |   23.28268 |         NA | United States  | Juan Rodriguez Ibarra | 1969-05-30       |   32.98289 |         76 | Mexico         | 21      | 21-15, 16-21, 15-11 | 00:55:00 | Winner’s Bracket | Round 1 |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |                  NA |                NA |                 NA |                 NA |                0 |                        NA |                  0 |               NA |
 
+You will see guessmax argument in read_csv here. A default property of read_csv is to guess the type of column by looking at the data in these columns. Generally it tries to detect the type by looking at forst few rows in each column. guess_max controls that how many rows it should see before it assigns a type to the column.
+
 ### Let’s explore the dataset
+We will use skim function to understand te data. As you can see we have 76756 rows with 65 variables. These are moderately large number of variables. We have charcater, numeric and date variables. We can see lot of missing data, hence it makes sense to explore missing data separately.
 
 ``` r
 skimr::skim(vb_matches)
