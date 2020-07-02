@@ -152,20 +152,21 @@ Data summary
 | l\_p2\_tot\_blocks        |      60560 |           0.21 |    1.06 |  1.56 |    0.00 |    0.00 |    0.00 |    2.00 |   13.00 | ▇▁▁▁▁ |
 | l\_p2\_tot\_digs          |      62178 |           0.19 |    7.14 |  5.18 |    0.00 |    3.00 |    6.00 |   10.00 |   41.00 | ▇▃▁▁▁ |
 
-We will dataexplorer package to explore the data further
+We will explore the missingdata now. We can use dataexplorer package to explore missing data as provides some very uesful visual summaries of the dataset.
 
 ``` r
 DataExplorer::plot_str(vb_matches)
 DataExplorer::plot_intro(vb_matches)
 ```
+![Missing 1_1](Plots/Missing1_1.png)
 
-![](volleyball_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![Missing 1](Plots/Missing%20Plot%201.png)
 
 ``` r
 DataExplorer::plot_missing(vb_matches)
 ```
 
-![](volleyball_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
+![Missing 2](Plots/Missing%20Plot%202.png)
 
 # Prepare data
 
