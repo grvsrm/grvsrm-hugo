@@ -169,6 +169,9 @@ DataExplorer::plot_missing(vb_matches)
 ![Missing 2](Plots/Missing%20Plot%202.png)
 
 # Prepare data
+We will do some transformations to make the data modelling ready. 
+* We should merge player 1 and player 2 stats for both winners and losers and treat it as one column.
+* We should use gender, circuit and year variables and drop rest for now
 
 ``` r
 vb_parsed <- vb_matches %>%
@@ -226,7 +229,10 @@ vb_df %>%
 | AVP     | M      | 2004 |      44 |    31 |      1 |    0 |             5 |      6 |   15 | win |
 | AVP     | M      | 2004 |      55 |    31 |      6 |    0 |             4 |      8 |   22 | win |
 
-# Some EDA
+Finally, we have created two separate data frames for winner and losers and then combined them by binding rows. Our final dataframe is ready. We can use it for modelling now. It contains 28664 rows and 11 columns. Rows are lesser than the raw data as we have straight away removed missing values. Sample size s still large enough to perform modelling. 
+
+# Lets perform some EDA
+We can plot some visualizations to check if these varaibles are good enough to differntiate the two classes i.e. win and loss. 
 
 ``` r
 vb_df %>%
@@ -263,6 +269,8 @@ vb_df %>%
 ```
 
 ![](volleyball_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+These boxplots confirm that some of the features such as kills, errors, attacks are good predictors of outcome class. It is evident visually, we will confirm our hypothesis while modelling.
 
 ### Build a model
 
