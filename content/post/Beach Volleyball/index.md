@@ -7,6 +7,7 @@ tags: [rstats,tidymodels,xgboost, classification]
 date: 02-07-2020
 authors: ["admin"]
 share: false
+categories: ["Machine Learning"]
 image:
   placement: 1
   caption: "Image by H. B. from Pixabay"
@@ -15,7 +16,12 @@ image:
 
 NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned from her. You can find a screencast of her vidoes [here](https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA)
 
-Beach Volleyball matches are quite popular around the world. This dataset contains a huge record of beach volleyball matches. 
+Beach volleyball is a team sport played by two teams of two players on a sand court divided by a net. As in indoor volleyball, the objective of the game is to send the ball over the net and to ground it on the opponent's side of the court, and to prevent the same effort by the opponent. Beach Volleyball matches are quite popular around the world. The game holds high popularity in countries such as US and Brazil. 
+
+This dataset contains a huge record of beach volleyball matches. There are approximately 76500 rows in this dataset. Each row contains statistics of one match. Some of the important features available in the data are gender, stats related to winners and losers, macth outcome, date, player details etc;
+
+The objective of this modelling exercise is to predict the outcome of the match using information available. It is a binary classification problem and we have several ways to handle such problems, however, in this exercise we will xgboost algorithm for classification. Let's get started
+
 ### Let’s load the dataset
  
 ``` r
