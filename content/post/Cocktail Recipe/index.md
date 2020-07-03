@@ -16,7 +16,7 @@ image:
 
 NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned from her. You can find a screencast of her vidoes [here](https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA)
 
-Drinking fancy cocktails always puts us in the mood to have a good time, like crafting edible garnishes and floral beverages. But sometimes we don't feel like having to mix up an elaborate drink (even if it's supposedly healthier than our usual tipple) just to quench our cocktail craving. Luckily, mixology doesn't have to be complicated. Here we will showcase a method to find out what ingredients in a cocktail go together and what should not be mixed using dimensionality reduction techniques. We will demonstarte two most popular and powerful methods:
+Drinking fancy cocktails always puts us in the mood to have a good time, like crafting edible garnishes and floral beverages. But sometimes we don't feel like having to mix up an elaborate drink (even if it's supposedly healthier than our usual tipple) just to quench our cocktail craving. Luckily, mixology doesn't have to be complicated. Here we will showcase a method to find out what ingredients in a cocktail go together and what should not be mixed using dimensionality reduction techniques. We will demonstrate two most popular and powerful methods:
 * [Principal Component Analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) (also knowns as PCA)
 * [Uniform Monifold Approximation and Projection](https://umap-learn.readthedocs.io/en/latest/) ( also known as UMAP)
 
@@ -25,6 +25,7 @@ Sounds fun..! Let's get started.
 
 
 ### Load the data
+Our data comes from the [tidy tuesday dataset](https://github.com/rfordatascience/tidytuesday) which is a weekly data project aimed at the R ecosystem from the R4DS online learning community.
 
 ``` r
 boston_cocktails <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-26/boston_cocktails.csv")
@@ -40,6 +41,10 @@ boston_cocktails %>% head() %>%
 | Gauguin         | Cocktail Classics |       1 |                  4 | Lime Juice          | 1 oz     |
 | Fort Lauderdale | Cocktail Classics |       2 |                  1 | Light Rum           | 1 1/2 oz |
 | Fort Lauderdale | Cocktail Classics |       2 |                  2 | Sweet Vermouth      | 1/2 oz   |
+
+We see 3643 observations with 6 variables, Let's explore it more to see if it needs further transformation.
+
+### Data Transformation
 
 ``` r
 cocktail_parsed <- boston_cocktails %>% 
@@ -79,6 +84,10 @@ cocktail_parsed %>%
 | Apple Pie No. 1 | Cocktail Classics     |      13 |                  5 | lemon juice | 1 oz    |            1.00 |
 | Why Not?        | Cocktail Classics     |      16 |                  4 | lemon juice | 1 oz    |            1.00 |
 
+We have done some clean up in the ingredient column and separated out the quantity from measure column and have created a separate variable called measure_number. This wrangling leaves us with 2546 rows and 7 columns.
+
+Lets widen the dataset so that we can bring it in a form where dimensionality reduction can be applied.
+
 ``` r
 cocktail_df <- cocktail_parsed %>% 
     select(-ingredient_number, -row_id, -measure) %>% 
@@ -97,7 +106,12 @@ DataExplorer::introduce(cocktail_df)
     ## # ... with 4 more variables: total_missing_values <int>, complete_rows <int>,
     ## #   total_observations <int>, memory_usage <dbl>
 
-# Principal Component Analysis (PCA)
+Finally, we have our tidy dataframe ready for some modelling. We have 937 observations with total 42 different variables out of which 40 are continuous and 2 are discrete.
+We will apply dimensionality reduction now.
+
+## Principal Component Analysis (PCA)
+
+We will start with PCA. To apply PCA, we will create a recipe in an unsupervised fashion without mentioning any outcome variable. We won't use name and category features, So their roles have been updated to "ID". Step_pca performs pca in R tidymodels framework.
 
 ``` r
 pca_rec <- recipe(~., data = cocktail_df) %>% 
@@ -124,6 +138,8 @@ pca_prep
     ## Centering and scaling for lemon_juice, lime_juice, gin, ... [trained]
     ## PCA extraction with lemon_juice, lime_juice, gin, ... [trained]
 
+When we prep the recipe, it performs all the step transformations specified in our recipe. If we want to see the details we can use tidy() function to get a tabular summary.
+
 ``` r
 tidied_pca <- tidy(pca_prep, 2)
 tidied_pca
@@ -144,6 +160,8 @@ tidied_pca
     ## 10 dry_vermouth  0.0874 PC1       pca_I3IqE
     ## # ... with 1,590 more rows
 
+### Visualise Principal Components
+
 ``` r
 tidied_pca %>% 
     filter(component %in% paste0("PC", 1:5)) %>% 
@@ -153,7 +171,7 @@ tidied_pca %>%
     facet_wrap(~ component, nrow = 1)
 ```
 
-![](index_files/figure-gfm/PCA_Plot_1-1.png)<!-- -->
+![](Plots/PCA_Plot_1-1.png)<!-- -->
 
 ``` r
 library(tidytext)
@@ -170,7 +188,7 @@ tidied_pca %>%
     labs(x = NULL, y = NULL, fill = "Positive?")
 ```
 
-![](index_files/figure-gfm/PCA_Plot_2-1.png)<!-- -->
+![](Plots/PCA_Plot_2-1.png)<!-- -->
 
 ``` r
 juice(pca_prep) %>%
@@ -180,9 +198,10 @@ juice(pca_prep) %>%
     labs(color = NULL)
 ```
 
-![](index_files/figure-gfm/PCA_Plot_3-1.png)<!-- -->
+![](Plots/PCA_Plot_3-1.png)<!-- -->
 
-# Uniform Manifold Approximation and Projection (UMAP)
+
+## Uniform Manifold Approximation and Projection (UMAP)
 
 ``` r
 library(embed)
