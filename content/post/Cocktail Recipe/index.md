@@ -1,7 +1,22 @@
-Applying Dimensionality Reduction Technique on Cocktail Recipe Dataset
 ================
 Gaurav Sharma
 02/07/2020
+
+---
+title: "Applying Dimensionality Reduction on Cocktail Recipe Data in R"
+subtitle: "An example of Dimensionality Reduction using PCA and UMAP with Tidymodels in R"
+summary: "An example of Dimensionality Reduction using PCA and UMAP with Tidymodels in R"
+tags: [rstats,tidymodels,PCA,UMAP,tidyverse,dimensionality reduction]
+lastmod: false
+date: 03-07-2020
+authors: ["admin"]
+share: false
+categories: ["Machine Learning"]
+image:
+  placement: 1
+  caption: "Image by Pexels from Pixabay "
+  preview_only: false
+---
 
 # Load the data
 
