@@ -1,5 +1,5 @@
 ---
-title: "Applying Dimensionality Reduction on Cocktail Recipe Data in R"
+title: "Dimensionality Reduction on Cocktail Data in R"
 subtitle: "An example of Dimensionality Reduction using PCA and UMAP with Tidymodels in R"
 summary: "An example of Dimensionality Reduction using PCA and UMAP with Tidymodels in R"
 tags: [rstats,tidymodels,PCA,UMAP,tidyverse,dimensionality reduction]
@@ -14,7 +14,17 @@ image:
   preview_only: false
 ---
 
-# Load the data
+NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned from her. You can find a screencast of her vidoes [here](https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA)
+
+Drinking fancy cocktails always puts us in the mood to have a good time, like crafting edible garnishes and floral beverages. But sometimes we don't feel like having to mix up an elaborate drink (even if it's supposedly healthier than our usual tipple) just to quench our cocktail craving. Luckily, mixology doesn't have to be complicated. Here we will showcase a method to find out what ingredients in a cocktail go together and what should not be mixed using dimensionality reduction techniques. We will demonstarte two most popular and powerful methods:
+* [Principal Component Analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) (also knowns as PCA)
+* [Uniform Monifold Approximation and Projection](https://umap-learn.readthedocs.io/en/latest/) ( also known as UMAP)
+
+
+Sounds fun..! Let's get started.
+
+
+### Load the data
 
 ``` r
 boston_cocktails <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-26/boston_cocktails.csv")
