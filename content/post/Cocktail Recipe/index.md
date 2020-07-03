@@ -202,6 +202,8 @@ juice(pca_prep) %>%
 
 
 ## Uniform Manifold Approximation and Projection (UMAP)
+We saw how PCA converts high dimensional data into principal components that explain a large part of the variations in the data. Let us now use UMAP to transform the same data.
+We will create recipe from UMAP transform and then prep it as we did in PCA
 
 ``` r
 library(embed)
@@ -230,6 +232,9 @@ umap_prep
     ## Centering and scaling for lemon_juice, lime_juice, gin, ... [trained]
     ## UMAP embedding for lemon_juice, lime_juice, gin, ... [trained]
 
+### Visualise UMAP Components
+Using 42 variables, UMAP has created two UMAP components. Let's chec them visually.
+
 ``` r
 juice(umap_prep) %>%
     ggplot(aes(umap_1, umap_2, label = name)) +
@@ -238,4 +243,10 @@ juice(umap_prep) %>%
     labs(color = NULL)
 ```
 
-![](index_files/figure-gfm/UMAP_Plot_1-1.png)<!-- -->
+![](Plots/UMAP_Plot_1-1.png)<!-- -->
+
+### Conclusion
+
+In this post, we saw how PCA and UMAP algorithms can be used conveniently to reduce the dimensions of a high dimensional dataset. These algorithms can be used not only to reduce the dimension but also to understand the patterns in our data and what goes woth what to some extent. 
+
+I hope this helps. Thank you so much for reading. See you again in the next post..!!
