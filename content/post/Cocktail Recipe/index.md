@@ -1,7 +1,3 @@
-================
-Gaurav Sharma
-02/07/2020
-
 ---
 title: "Applying Dimensionality Reduction on Cocktail Recipe Data in R"
 subtitle: "An example of Dimensionality Reduction using PCA and UMAP with Tidymodels in R"
