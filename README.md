@@ -1,6 +1,6 @@
 ### A few important things about my website
 
-A personal website having all your work that you want to showcase to the world is quite necessary these days. 
+A personal website having all your work that you want to showcase to the world is becoming quite necessary these days. 
 
 This website is built with blogdown and Hugo, and deployed using Netlify. My blog posts are released under a Creative Commons Attribution-ShareAlike 4.0 International License.
 Copyright and Licenese info can be found at the bottom of this page.
