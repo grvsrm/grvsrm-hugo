@@ -1,34 +1,40 @@
-Predicting Astronauts Mission Duration using Tidymodels in R
-================
-Gaurav Sharma
-17/07/2020
+---
+title: "A Bagged Tree Model on Astronaut Mission Dataset in R"
+subtitle: "An example of Regression using Bagged Tree and Tidymodels in R"
+summary: "An example of Regression using Bagged Tree and Tidymodels in R"
+tags: [rstats,tidymodels,bagging,regression]
+lastmod: false
+date: 19-07-2020
+authors: ["admin"]
+share: false
+categories: ["Machine Learning"]
+image:
+  placement: 1
+  caption: "Image by skeeze from Pixabay"
+  preview_only: false
+---
 
-### Load the data
+NOTE: These days I am following [Julia Silge](https://juliasilge.com/) for learning tidymodels framework better. This post is inspired from what I learned from her. You can find a screencast of her vidoes [here](https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA)
+
+Space exploration is the use of astronomy and space technology to explore outer space. While the exploration of space is carried out mainly by astronomers with telescopes, its physical exploration though is conducted both by unmanned robotic space probes and human spaceflight. Space exploration, like its classical form astronomy, is one of the main sources for space science. [Read More here] (https://en.wikipedia.org/wiki/Space_exploration)
+
+This database contains publically available information about all astronauts who participated in space missions before 15 January 2020 collected from NASA, Roscosmos, and fun-made websites. The provided information includes full astronaut name, sex, date of birth, nationality, military status, a title and year of a selection program, and information about each mission completed by a particular astronaut such as a year, ascend and descend shuttle names, mission and extravehicular activity (EVAs) durations.
+
+In following analysis, we will try to find out if there is a relationship between the information available about the astronauts, space mission and the duration of the space mission. Can we create a model that can help us in predicting the duration of  a space mission by the information available about astronauts and space flight. Primarily we are trying to predict a continuous variable, hence we will use regression. More specifically we will use bagged trees using tidymodels workflow. We will create two models and will compare their performance. 
+Let's get started..!
+
+Lets load the data to see what we have here...
 
 ``` r
 ttload <- tidytuesdayR::tt_load(x = "2020-07-14")
-```
-
-    ## --- Compiling #TidyTuesday Information for 2020-07-14 ----
-
-    ## --- There is 1 file available ---
-
-    ## --- Starting Download ---
-
-    ## 
-    ##  Downloading file 1 of 1: `astronauts.csv`
-
-    ## --- Download complete ---
-
-``` r
 astranauts <- ttload$astronauts
 ```
 
 ### Some EDA
+We will perform EDA to see if we can find some important relationships between various predictors and outcome. We will also try to find out some of the predictors that seem important for this purpose.
 
-Chang-Diaz, Franklin R. and Ross, Jerry L. have done the most number of
-missions in the history. Both have been to space 7 times. Both belong to
-US. Following table sows top 10 astronauts with most number of trips
+
+Chang-Diaz, Franklin R. and Ross, Jerry L. have done the most number of missions in the history. Both have been to space 7 times. Both belong to US. Following table sows top 10 astronauts with most number of trips
 
 ``` r
 astranauts %>% 
@@ -51,9 +57,7 @@ astranauts %>%
 | U.S.S.R/Russia | Malenchenko, Yuri        | male | 6 |
 | U.S.           | Blaha, John E.           | male | 5 |
 
-There are 40 countries that have been to space at least once. US tops
-the lists with 854 missions, Russia has 273 mission so far. Following
-table sows top 10 countries with most number of space missions.
+There are 40 countries that have been to space at least once. US tops the lists with 854 missions, Russia has 273 mission so far. Following table sows top 10 countries with most number of space missions.
 
 ``` r
 astranauts %>% 
@@ -76,8 +80,7 @@ astranauts %>%
 | U.K./U.S.      |   6 |
 | Australia      |   4 |
 
-Let’s plot a visualization to see how duration of space mission has
-change over the decades.
+Let’s plot a visualization to see how duration of space mission has change over the decades.
 
 ``` r
 astranauts %>% 
@@ -92,19 +95,11 @@ astranauts %>%
        y = "Duration of Mission in Hours ")
 ```
 
-    ## Warning: Transformation introduced infinite values in continuous y-axis
 
-    ## Warning: Removed 6 rows containing non-finite values (stat_boxplot).
+![](index_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> 
+Interestingly, the duration of missions has increased over the decades and their is a significant jump in median duration after 2010, which generates a hypothesis here that year of mission can be a good predictor of duration of space mission. We will confirm this hypothesis later, let’s move further.
 
-![](index_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> Interestingly,
-the duration of missions has increased over the decades and their is a
-significant jump in median duration after 2010, which generates a
-hypothesis here that year of mission can be a good predictor of duration
-of space mission. We will confirm this hypothesis later, let’s move
-further.
-
-Similarly, We can plot a similar visualization for the number of space
-mission in each decade. It will be interesting to see.
+Similarly, We can plot a similar visualization for the number of space mission in each decade. It will be interesting to see.
 
 ``` r
 astranauts %>% 
@@ -142,27 +137,9 @@ astranauts %>%
   GGally::ggpairs()
 ```
 
-    ## Registered S3 method overwritten by 'GGally':
-    ##   method from   
-    ##   +.gg   ggplot2
+![](index_files/figure-gfm/unnamed-chunk-6-1.png)<!-- --> 
 
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-
-![](index_files/figure-gfm/unnamed-chunk-6-1.png)<!-- --> It seems that
+It seems that
 
   - Sex or military/civilian are not very strong predictors of mission
     duration.
@@ -171,8 +148,7 @@ astranauts %>%
   - Occupation, year of mission and field 21 seem to be good predictors
     of the outcome.
 
-These arre some good hypothesis to test, We will test them while
-building the model.
+These arre some good hypothesis to test, We will test them while building the model.
 
 #### Let’s prepare the dataset to build the model
 
@@ -214,14 +190,13 @@ astro_recipe <- recipe(hours_mission~., data = astro_train) %>%
   step_dummy(all_nominal(), -has_role("ID"))
 ```
 
-    ## Registered S3 methods overwritten by 'themis':
-    ##   method               from   
-    ##   bake.step_downsample recipes
-    ##   bake.step_upsample   recipes
-    ##   prep.step_downsample recipes
-    ##   prep.step_upsample   recipes
-    ##   tidy.step_downsample recipes
-    ##   tidy.step_upsample   recipes
+Model Specs and a workflow to make things systematic and faster
+We are creating two models
+
+* Bagged Tree, we will use rpart engine for this model
+* Bagged MARS, we will use earth engine for this model
+
+For more info on these models, you may find [this](https://www.tidymodels.org/find/parsnip/) link useful. 
 
 ``` r
 #install.packages("baguette")
@@ -240,7 +215,11 @@ mars_spec <- bag_mars() %>%
 astro_wf <- workflow() %>% 
   add_recipe(recipe = astro_recipe)
 
+```
 
+Let's fit the model to the training data
+
+``` r
 tree_fit <- astro_wf %>% 
   add_model(tree_spec) %>% 
   fit(astro_train)
@@ -250,7 +229,7 @@ mars_fit <- astro_wf %>%
   fit(astro_train)
 ```
 
-Let’s check our predictions
+We will test the model on test data and check our predictions
 
 ``` r
 test_rs <- astro_test %>% 
@@ -261,6 +240,8 @@ test_rs <- astro_test %>%
 ```
 
 Let’s compare the results using some visualizations
+
+Evaluation metrics for Bagged Tree Model
 
 ``` r
 test_rs %>% 
@@ -274,6 +255,9 @@ test_rs %>%
     ## 2 rsq     standard       0.760
     ## 3 mae     standard       0.367
 
+
+Evaluation metrics for Bagged MARS Model
+
 ``` r
 test_rs %>% 
   metrics(hours_mission, .pred_mars)
@@ -285,3 +269,7 @@ test_rs %>%
     ## 1 rmse    standard       0.667
     ## 2 rsq     standard       0.764
     ## 3 mae     standard       0.403
+
+Seeing the results, It seems that both the models perform quite similar. There is almost no difference in rmse and R-square. Although bagged tree shows slightly lower absoloute error. It is difficult to choose any one of these basis this performance. A wise step further from here is to spend more time in feature exploration both to improve the perfomance of the model and to be able to choose one model over other in terms of performance. Remember, modelling is an iterative approach.
+
+Okay..! We did it..!!! In this post, we saw how we can use different techniues (read modelling techniques) for regression. We used tidyverse for data exploration, we created two different regression models using Bagging and MARS approach, we evaluated the performance of these two models.  I hope this helps. Thank you so much for reading. See you again in the next post..!!
