@@ -96,7 +96,7 @@ astranauts %>%
 ```
 
 
-![a](index_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> 
+![](figure-gfm/unnamed-chunk-4-1.png)<!-- --> 
 
 Interestingly, the duration of missions has increased over the decades and their is a significant jump in median duration after 2010, which generates a hypothesis here that year of mission can be a good predictor of duration of space mission. We will confirm this hypothesis later, let’s move further.
 
@@ -115,7 +115,7 @@ astranauts %>%
   coord_flip()
 ```
 
-![b](index_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 #### Lets do some more analysis to understand what can be a good predictor to predict mission duration
 
@@ -138,7 +138,7 @@ astranauts %>%
   GGally::ggpairs()
 ```
 
-![c](index_files/figure-gfm/unnamed-chunk-6-1.png)<!-- --> 
+![](figure-gfm/unnamed-chunk-6-1.png)<!-- --> 
 
 It seems that
 
