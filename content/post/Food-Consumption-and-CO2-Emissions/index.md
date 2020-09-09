@@ -124,7 +124,7 @@ food_consumption_tidy %>%
     labs(title = "Food Consumption and CO2 emission distribution")
 ```
 
-![](index_files/figure-gfm/boxplot-1.png)<!-- -->
+![](figure-gfm/boxplot-1.png)<!-- -->
 
 Box-plot shows that co2 emissions and food consumption patterns vary
 drastically among countries. The highest consumption countries have 1000
@@ -144,7 +144,7 @@ food_consumption %>%
     labs(title = "Mean CO2 emission across various food categories")
 ```
 
-![](index_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 Clearly, Lamb & Goat and Beef have extremely high carbon emission and
 must be discouraged eating. Although high carbon emission indicates that
@@ -161,7 +161,7 @@ food_consumption %>%
     labs(title = "Strength between food consumption anf co2 emission")
 ```
 
-![](index_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> This shows
+![](figure-gfm/unnamed-chunk-4-1.png)<!-- --> This shows
 that there is a linear relationship between food consumption and co2
 emission. It strongly suggests that there is a mathematical relationship
 to calculate the carbon emission level when food consumption is known.
@@ -170,7 +170,7 @@ Lets create another column which can help us in categorizing the dataset
 in Animal and Non-Animal Categories of food. Following image shows
 details about the food categories that have been used in this study.
 
-![](index_files/figure-gfm/Food_Category.png)<!-- -->
+![](figure-gfm/Food_Category.png)<!-- -->
 
 ``` r
 food_consumption <- food_consumption %>% 
@@ -204,7 +204,7 @@ food_consumption %>%
          x = "")
 ```
 
-![](index_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 Seeing the above visualization, we can form a hypothesis that there is a
 significant difference in mean co2 emission levels between Animal and
@@ -295,7 +295,7 @@ food_consumption %>%
          y = "")
 ```
 
-![](index_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ### Most CO2 emmission coutries in various food categories
 
@@ -315,7 +315,7 @@ food_consumption %>%
          y = "")
 ```
 
-![](index_files/figure-gfm/unnamed-chunk-10-1.png)<!-- --> Nothing
+![](figure-gfm/unnamed-chunk-10-1.png)<!-- --> Nothing
 strange here, As there is a linear relationship between food consumption
 and co2 emissions, hence same countries appear here also on top.
 
@@ -332,7 +332,7 @@ food_consumption %>%
     facet_wrap(~feature, nrow = 2)
 ```
 
-![](index_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 Okay..\! We did it..\!\!\! In this post, we saw how we can use different
 data exploration techniques to understand our data better. We also saw
