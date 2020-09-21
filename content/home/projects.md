@@ -54,11 +54,11 @@ subtitle = ""
   #   Any HTML color name or Hex value is valid.
   
   # Background color.
-   color = ""
+  # color = "navy"
   
   # Background gradient.
-   gradient_start = ""
-   gradient_end = ""
+  # gradient_start = ""
+  # gradient_end = ""
   
   # Background image.
   # image = "background.jpg"  # Name of image in `static/img/`.
