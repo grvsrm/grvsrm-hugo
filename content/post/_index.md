@@ -8,7 +8,7 @@ title: Posts
 view: 3
 
 # Optional header image (relative to `static/img/` folder).
-header:
-  image: "header.jpg"
+# header:
+#  image: "header.jpg"
   caption: "Image credit: Becca Clark from Pixabay "
 ---
