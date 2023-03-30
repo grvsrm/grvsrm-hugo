@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Data Scientist | Engineer | INTJ
+role: Data Enthusiast | Engineer | INTJ
 
 # Organizations/Affiliations
 organizations:
