@@ -1,4 +1,5 @@
 ---
+title: Posts
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QPP08CW0Z"></script>
 <script>
@@ -8,8 +9,6 @@
 
   gtag('config', 'G-9QPP08CW0Z');
 </script>
-title: Posts
-
 # View.
 #   1 = List
 #   2 = Compact
